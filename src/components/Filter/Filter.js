@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import { BiSearchAlt } from 'react-icons/bi';
 class Filter extends Component {
   state = {
     filter: '',
@@ -17,14 +16,13 @@ class Filter extends Component {
     return (
       <>
         <h3>Find contacts by name</h3>
-        <input type="text" name="filter" onChange={this.handleQuery} value={this.state.filter} />
+        <label>
+          <input type="text" name="filter" onChange={this.handleQuery} value={this.state.filter} />
+          <BiSearchAlt size="18" />
+        </label>
       </>
     );
   }
 }
-
-// Filter.propTypes = {
-//   queryHandler: PropTypes.func.isRequired,
-// };
 
 export default Filter;
