@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Label, FormSection } from './Form.styled';
 
 class Form extends Component {
   state = {
@@ -24,8 +25,8 @@ class Form extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <FormSection onSubmit={this.handleSubmit}>
+        <Label>
           Name
           <input
             onChange={this.onChange}
@@ -36,8 +37,8 @@ class Form extends Component {
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
           />
-        </label>
-        <label>
+        </Label>
+        <Label>
           Number
           <input
             onChange={this.onChange}
@@ -48,9 +49,9 @@ class Form extends Component {
             title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
             required
           />
-        </label>
+        </Label>
         <button type="submit">Add contact</button>
-      </form>
+      </FormSection>
     );
   }
 }

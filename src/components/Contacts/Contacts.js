@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
-import s from './Contacts.module.css';
 import ListElement from '../ListElement';
+import { List } from './Contacts.styled';
 
-const Contacts = ({ contactsList, searchRes, btnDelete }) => {
+const Contacts = ({ contactsList, searchResult, btnDelete }) => {
   const isListEmpty = contactsList.length === 0;
-  const isSearchResEmpty = searchRes.length === 0;
+  const isSearchResultEmpty = searchResult.length === 0;
   return (
     <div>
-      {isListEmpty && <p className="message">Your contacts List is still empty.</p>}
-      <ul className={s.list}>
-        {isSearchResEmpty
+      {isListEmpty && <p>Your contacts List is still empty.</p>}
+      <List>
+        {isSearchResultEmpty
           ? contactsList.map(contact => (
               <ListElement elData={contact} deleteBtn={btnDelete} key={contact.id} />
             ))
-          : searchRes.map(contact => <ListElement elData={contact} key={contact.id} />)}
-      </ul>
+          : searchResult.map(contact => <ListElement elData={contact} key={contact.id} />)}
+      </List>
     </div>
   );
 };
@@ -27,11 +27,7 @@ Contacts.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   ),
-};
-
-Contacts.propTypes = {
-  contactsList: PropTypes.arrayOf(PropTypes.object),
-  searchRes: PropTypes.array.isRequired,
+  searchResult: PropTypes.array.isRequired,
   btnDelete: PropTypes.func,
 };
 

@@ -1,22 +1,23 @@
 import PropTypes from 'prop-types';
 import { FaUser } from 'react-icons/fa';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
-
-import s from './ListElement.module.css';
+import { Button, Contact, TextWrapper } from './ListElement.styled';
 
 const ListElement = ({ elData, deleteBtn }) => {
   const deleteItem = e => {
-    // console.log(deleteBtn);
+    console.log(deleteBtn);
     deleteBtn(elData.id);
   };
   return (
-    <li className={s.item}>
-      <FaUser className={s.icon} />
-      {elData.name}: {elData.number}
-      <button type="button" data-id={elData.id} onClick={deleteItem}>
+    <Contact>
+      <TextWrapper>
+        <FaUser />
+        {elData.name}: {elData.number}
+      </TextWrapper>
+      <Button type="button" data-id={elData.id} onClick={deleteItem}>
         <RiDeleteBin5Fill />
-      </button>
-    </li>
+      </Button>
+    </Contact>
   );
 };
 

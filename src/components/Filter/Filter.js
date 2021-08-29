@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
+import { Label } from './Filter.styled';
 class Filter extends Component {
   state = {
     filter: '',
@@ -14,13 +15,13 @@ class Filter extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <h3>Find contacts by name</h3>
-        <label>
+        <Label>
           <input type="text" name="filter" onChange={this.handleQuery} value={this.state.filter} />
           <BiSearchAlt size="18" />
-        </label>
-      </>
+        </Label>
+      </div>
     );
   }
 }

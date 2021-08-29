@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { v4 as uuidv4, v4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Form from './components/Form';
 import Contacts from './components/Contacts';
 import Filter from './components/Filter';
+import { Wrapper } from './App.styled';
 
 class App extends Component {
   state = {
@@ -14,7 +15,7 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    searchRes: [],
+    searchResult: [],
   };
 
   handleFormSubmit = data => {
@@ -36,12 +37,12 @@ class App extends Component {
   handleQuery = data => {
     if (data.trim() === '') {
       this.updateStateEl('filter', '');
-      this.updateStateEl('searchRes', []);
+      this.updateStateEl('searchResult', []);
       return;
     }
     this.setState({ filter: data });
     const res = this.searchContacts(data);
-    this.setState({ searchRes: res });
+    this.setState({ searchResult: res });
   };
 
   updateStateEl = (type, value) => {
@@ -61,17 +62,21 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, searchRes } = this.state;
+    const { contacts, searchResult } = this.state;
 
     return (
-      <div>
+      <Wrapper>
         <h1>Phonebook</h1>
         <Form onSubmit={this.handleFormSubmit} />
 
         <h2>Contacts</h2>
         <Filter onChange={this.handleQuery} />
-        <Contacts searchRes={searchRes} contactsList={contacts} btnDelete={this.onDeleteBtn} />
-      </div>
+        <Contacts
+          searchResult={searchResult}
+          contactsList={contacts}
+          btnDelete={this.onDeleteBtn}
+        />
+      </Wrapper>
     );
   }
 }
