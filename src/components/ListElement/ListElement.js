@@ -5,7 +5,6 @@ import { Button, Contact, TextWrapper } from './ListElement.styled';
 
 const ListElement = ({ elData, deleteBtn }) => {
   const deleteItem = e => {
-    console.log(deleteBtn);
     deleteBtn(elData.id);
   };
   return (

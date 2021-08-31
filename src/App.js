@@ -26,9 +26,6 @@ class App extends Component {
         contacts: [...prevState.contacts, { name, number, id: uuidv4() }],
       };
     });
-    // this.setState({
-    //   contacts: [...this.state.contacts, { name: data.name, number: data.number, id: uuidv4() }],
-    // });
   };
 
   searchContacts = query => {
