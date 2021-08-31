@@ -2,6 +2,12 @@ import styled from '@emotion/styled';
 
 export const Button = styled.button`
   width: 80px;
+
+  transition: all 250ms ease;
+  &:hover,
+  :focus {
+    background-color: skyblue;
+  }
 `;
 
 export const Contact = styled.li`

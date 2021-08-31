@@ -18,12 +18,17 @@ class App extends Component {
     searchResult: [],
   };
 
-  handleFormSubmit = data => {
-    const isDouble = this.checkForDouble(data.name);
+  handleFormSubmit = ({ name, number }) => {
+    const isDouble = this.checkForDouble(name);
     if (isDouble) return;
-    this.setState({
-      contacts: [...this.state.contacts, { name: data.name, number: data.number, id: uuidv4() }],
+    this.setState(prevState => {
+      return {
+        contacts: [...prevState.contacts, { name, number, id: uuidv4() }],
+      };
     });
+    // this.setState({
+    //   contacts: [...this.state.contacts, { name: data.name, number: data.number, id: uuidv4() }],
+    // });
   };
 
   searchContacts = query => {
