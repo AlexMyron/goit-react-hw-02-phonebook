@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Form from './components/Form';
@@ -6,7 +7,63 @@ import Contacts from './components/Contacts';
 import Filter from './components/Filter';
 import { Wrapper } from './App.styled';
 
-class App extends Component {
+const App = () => {
+  const [contacts, setContacts] = useState([
+    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  ]);
+  const [filter, setFilter] = useState('');
+  const [searchResult, setSearchResult] = useState([]);
+
+  const handleFormSubmit = ({ name, number }) => {
+    const isDouble = checkForDouble(name);
+    if (isDouble) return;
+    setContacts(state => [...state, { name, number, id: uuidv4() }]);
+  };
+
+  const searchContacts = query => {
+    const searchQuery = query.trim().toLowerCase();
+
+    return contacts.filter(el => el.name.toLowerCase().indexOf(searchQuery) > -1);
+  };
+
+  const handleQuery = data => {
+    if (data.trim() === '') {
+      setFilter('');
+      setSearchResult([]);
+      return;
+    }
+    setFilter(data);
+    const res = searchContacts(data);
+    setSearchResult(res);
+  };
+
+  const checkForDouble = newName => {
+    const isDouble = contacts.find(contact => contact.name === newName);
+    if (isDouble) alert(`${newName} is already in contacts`);
+    return isDouble;
+  };
+
+  const onDeleteBtn = dataId => {
+    const updatedList = contacts.filter(el => el.id !== dataId);
+    setContacts(updatedList);
+  };
+
+  return (
+    <Wrapper>
+      <h1>Phonebook</h1>
+      <Form onSubmit={handleFormSubmit} />
+
+      <h2>Contacts</h2>
+      <Filter onChange={handleQuery} />
+      <Contacts searchResult={searchResult} contactsList={contacts} btnDelete={onDeleteBtn} />
+    </Wrapper>
+  );
+};
+
+class classedApp extends Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
